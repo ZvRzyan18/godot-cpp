@@ -129,6 +129,17 @@ struct BuildIndexSequence : BuildIndexSequence<N - 1, N - 1, Is...> {};
 template <size_t... Is>
 struct BuildIndexSequence<0, Is...> : IndexSequence<Is...> {};
 
+
+#if defined(FASTEST_TRIG)
+#define __TRIG_FUNC 2
+#elif defined(FAST_TRIG)
+#define __TRIG_FUNC 1
+#elif defined(ACCURATE_FAST_TRIG)
+#define __TRIG_FUNC 0
+#else
+#define __TRIG_FUNC -1
+#endif
+
 } //namespace godot
 
 // To maintain compatibility an alias is defined outside the namespace.
