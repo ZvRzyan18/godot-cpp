@@ -270,6 +270,659 @@ inline int64_t posmod(int64_t p_x, int64_t p_y) {
 	return value;
 }
 
+/*template trig func*/
+template<typename T, uint8_t flag>
+inline T t_sine90(const T x) {
+ const	T x_squared = -x * x;
+	T accumulation = x;
+	T iteration = x;
+	switch(flag) {
+	 case 1:
+                            //  1 / (3 * 2)   
+	iteration *= x_squared * 0.1666666666666666574148081281236954964697;
+	accumulation += iteration;
+                            //  1 / (5 * 4)   
+	iteration *= x_squared * 0.0500000000000000027755575615628913510591;
+	accumulation += iteration;
+                            //  1 / (7 * 6)   
+	iteration *= x_squared * 0.0238095238095238082021154468748136423528;
+	accumulation += iteration;
+                            //  1 / (9 * 8)   
+	iteration *= x_squared * 0.0138888888888888881179006773436412913725;
+	accumulation += iteration;
+                            //  1 / (11 * 10)   
+	iteration *= x_squared * 0.0090909090909090904675249333877218305133;
+	accumulation += iteration;
+	 break;
+	 case 2:
+                            //  1 / (3 * 2)   
+	iteration *= x_squared * 0.1666666666666666574148081281236954964697;
+	accumulation += iteration;
+                            //  1 / (5 * 4)   
+	iteration *= x_squared * 0.0500000000000000027755575615628913510591;
+	accumulation += iteration;
+	 break;
+	 default:
+                            //  1 / (3 * 2)   
+	iteration *= x_squared * 0.1666666666666666574148081281236954964697;
+	accumulation += iteration;
+                            //  1 / (5 * 4)   
+	iteration *= x_squared * 0.0500000000000000027755575615628913510591;
+	accumulation += iteration;
+                            //  1 / (7 * 6)   
+	iteration *= x_squared * 0.0238095238095238082021154468748136423528;
+	accumulation += iteration;
+                            //  1 / (9 * 8)   
+	iteration *= x_squared * 0.0138888888888888881179006773436412913725;
+	accumulation += iteration;
+                            //  1 / (11 * 10)   
+	iteration *= x_squared * 0.0090909090909090904675249333877218305133;
+	accumulation += iteration;
+                            //  1 / (13 * 12)   
+	iteration *= x_squared * 0.0064102564102564100340098107722042186651;
+	accumulation += iteration;
+                            //  1 / (15 * 14)   
+	iteration *= x_squared * 0.0047619047619047623343124797656855662353;
+	accumulation += iteration;
+                            //  1 / (17 * 16)   
+	iteration *= x_squared * 0.0036764705882352940666257801183292031055;
+	accumulation += iteration;
+                            //  1 / (19 * 18)   
+	iteration *= x_squared * 0.0029239766081871343406106689144507981837;
+	accumulation += iteration;
+	}
+	
+ return accumulation;
+}
+
+
+template<typename T, uint8_t flag>
+inline T t_cosine90(const T x) {
+ const	T x_squared = -x * x;
+	T accumulation = 1.0;
+	T iteration = 1.0;
+	switch(flag) {
+	 case 1:
+                            //  1 / (2 * 1)   
+	iteration *= x_squared * 0.5000000000000000000000000000000000000000;
+	accumulation += iteration;
+                            //  1 / (4 * 3)   
+	iteration *= x_squared * 0.0833333333333333333333333333333333293210;
+	accumulation += iteration;
+                            //  1 / (6 * 5)   
+	iteration *= x_squared * 0.0333333333333333333333333333333333329321;
+	accumulation += iteration;
+                            //  1 / (8 * 7)   
+	iteration *= x_squared * 0.0178571428571428571428571428571428562831;
+	accumulation += iteration;
+                            //  1 / (10 * 9)   
+	iteration *= x_squared * 0.0111111111111111111111111111111111114789;
+	accumulation += iteration;
+	 break;
+	 case 2:
+                            //  1 / (2 * 1)   
+	iteration *= x_squared * 0.5000000000000000000000000000000000000000;
+	accumulation += iteration;
+                            //  1 / (4 * 3)   
+	iteration *= x_squared * 0.0833333333333333333333333333333333293210;
+	accumulation += iteration;
+	 break;
+	 default:
+                            //  1 / (2 * 1)   
+	iteration *= x_squared * 0.5000000000000000000000000000000000000000;
+	accumulation += iteration;
+                            //  1 / (4 * 3)   
+	iteration *= x_squared * 0.0833333333333333333333333333333333293210;
+	accumulation += iteration;
+                            //  1 / (6 * 5)   
+	iteration *= x_squared * 0.0333333333333333333333333333333333329321;
+	accumulation += iteration;
+                            //  1 / (8 * 7)   
+	iteration *= x_squared * 0.0178571428571428571428571428571428562831;
+	accumulation += iteration;
+                            //  1 / (10 * 9)   
+	iteration *= x_squared * 0.0111111111111111111111111111111111114789;
+	accumulation += iteration;
+                            //  1 / (12 * 11)   
+	iteration *= x_squared * 0.0075757575757575757575757575757575759400;
+	accumulation += iteration;
+                            //  1 / (14 * 13)   
+	iteration *= x_squared * 0.0054945054945054945054945054945054948775;
+	accumulation += iteration;
+                            //  1 / (16 * 15)   
+	iteration *= x_squared * 0.0041666666666666666666666666666666666165;
+	accumulation += iteration;
+                            //  1 / (18 * 17)   
+	iteration *= x_squared * 0.0032679738562091503267973856209150326773;
+	accumulation += iteration;
+	}
+ return accumulation;
+}
+
+
+template<typename T, uint8_t flag>
+inline T t_sin(const T theta) {
+	constexpr T _pi = Math_PI;
+	constexpr T _pi_half = Math_PI/2;
+	constexpr T _pi_270 = Math_PI+_pi_half;
+	constexpr T _2_pi = Math_PI*2;
+	constexpr T _inv_2_pi = 1.0 / _2_pi;
+	
+	const T x = ((theta) - (int)((theta) * _inv_2_pi) * (_2_pi));
+
+ if(x <= _pi_half) //0 - 90 deg
+  return t_sine90<T, flag>(x);
+ else if(x > _pi_half && x <= _pi) //90 - 180 deg
+  return t_sine90<T, flag>(_pi_half-(x-_pi_half));
+ else if(x > _pi && x <= _pi_270) //180 - 270 deg
+  return -t_sine90<T, flag>(x-_pi);
+ else //270 - 360 deg
+  return -t_sine90<T, flag>(_pi_half-(x-_pi_270));
+ return 0;
+}
+
+
+template<typename T, uint8_t flag>
+inline T t_cos(const T theta) {
+	constexpr T _pi = Math_PI;
+	constexpr T _pi_half = Math_PI/2;
+	constexpr T _pi_270 = Math_PI+_pi_half;
+	constexpr T _2_pi = Math_PI*2;
+	constexpr T _inv_2_pi = 1.0 / _2_pi;
+
+	const T x = ((theta) - (int)((theta) * _inv_2_pi) * (_2_pi));
+
+ if(x <= _pi_half) //0 - 90 deg
+  return  t_cosine90<T, flag>(x);
+ else if(x > _pi_half && x <= _pi) //90 - 180 deg
+  return -t_cosine90<T, flag>(_pi_half-(x-_pi_half));
+ else if(x > _pi && x <= _pi_270) //180 - 270 deg
+  return -t_cosine90<T, flag>(x-_pi);
+ else //270 - 360 deg
+  return t_cosine90<T, flag>(_pi_half-(x-_pi_270));
+ return 0;
+}
+
+
+template<typename T, uint8_t flag>
+inline T t_tan(const T theta) {
+	constexpr T _pi = Math_PI;
+	constexpr T _pi_half = Math_PI/2;
+	constexpr T _pi_270 = Math_PI+_pi_half;
+	constexpr T _2_pi = Math_PI*2;
+	constexpr T _inv_2_pi = 1.0 / _2_pi;
+	
+	const T x = ((theta) - (int)((theta) * _inv_2_pi) * (_2_pi));
+
+ const T x_sub_pi_half = x-_pi_half;
+ const T x_sub_pi = x-_pi;
+ const T x_sub_pi_270 = x-_pi_270;
+ 
+ if(x <= _pi_half) //0 - 90 deg
+  return t_sine90<T, flag>(x) / t_cosine90<T, flag>(x);
+ else if(x > _pi_half && x <= _pi) //90 - 180 deg
+  return t_sine90<T, flag>(_pi_half-x_sub_pi_half) / -t_cosine90<T, flag>(_pi_half-x_sub_pi_half);
+ else if(x > _pi && x <= _pi_270) //180 - 270 deg
+  return -t_sine90<T, flag>(x_sub_pi) / -t_cosine90<T, flag>(x_sub_pi);
+ else //270 - 360 deg
+  return -t_sine90<T, flag>(_pi_half-x_sub_pi_270) / t_cosine90<T, flag>(_pi_half-x_sub_pi_270);
+ return 0;
+}
+
+template<typename T, uint8_t flag>
+inline T t_asin(const T ix) {
+ constexpr T _pi = Math_PI;
+	constexpr T _pi_half = Math_PI/2;
+ constexpr T _inv_pi = 1.0 / _pi;
+ T x = ((ix) - (int)((ix) * _inv_pi) * (_pi)); //-180 - 180 deg
+ 
+ if(x > _pi_half)
+  x -= _pi_half;
+ else if (x <= -_pi_half)
+  x += _pi_half;
+
+ const	T x_squared = x * x;
+	T accumulation = x;
+	T iteration = x;
+	T final_iter;
+	
+ switch(flag) {
+ 	case 1:
+	iteration *= x_squared;
+	              //(1/2)                 1 / 3   
+	accumulation += 0.5 * (iteration * 0.3333333333333333333333333333333333172839);
+
+	iteration *= x_squared;
+	            //((1*3)/(2*4))              1 / 5   
+	accumulation += 0.375 * (iteration * 0.2000000000000000000000000000000000096296);
+
+	iteration *= x_squared;
+	          //((1*3*5)/(2*4*6))             1 / 7   
+	accumulation += 0.3125 * (iteration * 0.1428571428571428571428571428571428502645);
+
+	iteration *= x_squared;
+	           //((1*3*5*7)/(2*4*6*8))         1 / 9   
+	accumulation += 0.2734375 * (iteration * 0.1111111111111111111111111111111111057613);
+
+	iteration *= x_squared;  
+	           //((1*3*5*7*9)/(2*4*6*8*10))         1 / 11   
+	accumulation += 0.24609375 * (iteration * 0.0909090909090909090909090909090909112795);
+
+	iteration *= x_squared;
+	    //((1*3*5*7*9*11)/(2*4*6*8*10*12))          1 / 13   
+	accumulation += 0.2255859375 * (iteration * 0.0769230769230769230769230769230769267806);
+
+	iteration *= x_squared;
+	//((1*3*5*7*9*11*13)/(2*4*6*8*10*12*14))               1 / 15   
+	accumulation += 0.20947265625 * (iteration * 0.0666666666666666666666666666666666658642);
+
+	iteration *= x_squared;
+	//((1*3*5*7*9*11*13*15)/(2*4*6*8*10*12*14*16))          1 / 17   
+	accumulation += 0.196380615234375 * (iteration * 0.0588235294117647058823529411764705889434);
+
+ final_iter = accumulation;
+ for(char i = 0; i < 6; i++)
+	 final_iter = final_iter - (t_sine90<T, flag>(final_iter) - x) / t_cosine90<T, flag>(final_iter);
+ 	break;
+ 	case 2:
+	iteration *= x_squared;
+	              //(1/2)                 1 / 3   
+	accumulation += 0.5 * (iteration * 0.3333333333333333333333333333333333172839);
+
+	iteration *= x_squared;
+	            //((1*3)/(2*4))              1 / 5   
+	accumulation += 0.375 * (iteration * 0.2000000000000000000000000000000000096296);
+
+	iteration *= x_squared;
+	          //((1*3*5)/(2*4*6))             1 / 7   
+	accumulation += 0.3125 * (iteration * 0.1428571428571428571428571428571428502645);
+
+	iteration *= x_squared;
+	           //((1*3*5*7)/(2*4*6*8))         1 / 9   
+	accumulation += 0.2734375 * (iteration * 0.1111111111111111111111111111111111057613);
+ 	
+ final_iter = accumulation;
+ for(char i = 0; i < 2; i++)
+	 final_iter = final_iter - (t_sine90<T, flag>(final_iter) - x) / t_cosine90<T, flag>(final_iter);
+
+ 	break;
+ 	default:
+	iteration *= x_squared;
+	              //(1/2)                 1 / 3   
+	accumulation += 0.5 * (iteration * 0.3333333333333333333333333333333333172839);
+
+	iteration *= x_squared;
+	            //((1*3)/(2*4))              1 / 5   
+	accumulation += 0.375 * (iteration * 0.2000000000000000000000000000000000096296);
+
+	iteration *= x_squared;
+	          //((1*3*5)/(2*4*6))             1 / 7   
+	accumulation += 0.3125 * (iteration * 0.1428571428571428571428571428571428502645);
+
+	iteration *= x_squared;
+	           //((1*3*5*7)/(2*4*6*8))         1 / 9   
+	accumulation += 0.2734375 * (iteration * 0.1111111111111111111111111111111111057613);
+
+	iteration *= x_squared;  
+	           //((1*3*5*7*9)/(2*4*6*8*10))         1 / 11   
+	accumulation += 0.24609375 * (iteration * 0.0909090909090909090909090909090909112795);
+
+	iteration *= x_squared;
+	    //((1*3*5*7*9*11)/(2*4*6*8*10*12))          1 / 13   
+	accumulation += 0.2255859375 * (iteration * 0.0769230769230769230769230769230769267806);
+
+	iteration *= x_squared;
+	//((1*3*5*7*9*11*13)/(2*4*6*8*10*12*14))               1 / 15   
+	accumulation += 0.20947265625 * (iteration * 0.0666666666666666666666666666666666658642);
+
+	iteration *= x_squared;
+	//((1*3*5*7*9*11*13*15)/(2*4*6*8*10*12*14*16))          1 / 17   
+	accumulation += 0.196380615234375 * (iteration * 0.0588235294117647058823529411764705889434);
+
+	iteration *= x_squared;
+	//((1*3*5*7*9*11*13*15*17)/(2*4*6*8*10*12*14*16*18))            1 / 19   
+	accumulation += 0.1854705810546875 * (iteration * 0.0526315789473684210526315789473684213694);
+
+ iteration *= x_squared;
+ //((1*3*5*7*9*11*13*15*17*19)/(2*4*6*8*10*12*14*16*18*20))          1 / 21   
+ accumulation += 0.176197052001953125 * (iteration * 0.0476190476190476190476190476190476167548);
+
+ iteration *= x_squared;
+ //((1*3*5*7*9*11*13*15*17*19*21)/(2*4*6*8*10*12*14*16*18*20*22))               1 / 23   
+ accumulation += 0.1681880950927734375 * (iteration * 0.0434782608695652173913043478260869591385);
+ 
+ iteration *= x_squared;
+ //((1*3*5*7*9*11*13*15*17*19*21*23)/(2*4*6*8*10*12*14*16*18*20*22*24))           1 / 25   
+ accumulation += 0.1611802577972412109375 * (iteration * 0.0400000000000000000000000000000000007222);
+
+ iteration *= x_squared;
+ //((1*3*5*7*9*11*13*15*17*19*21*23*25)/(2*4*6*8*10*12*14*16*18*20*22*24*26))             1 / 27   
+ accumulation += 0.15498101711273193359375 * (iteration * 0.0370370370370370370370370370370370372599);
+
+ iteration *= x_squared;                                    //  1 / 29   
+ accumulation += 0.1494459807872772216796875 * (iteration * 0.0344827586206896551724137931034482752395);
+
+ iteration *= x_squared;                                     //  1 / 31   
+ accumulation += 0.14446444809436798095703125 * (iteration * 0.0322580645161290322580645161290322572879);
+
+ iteration *= x_squared;                                          //  1 / 33   
+ accumulation += 0.1399499340914189815521240234375 * (iteration * 0.0303030303030303030303030303030303037598);
+ 
+ final_iter = accumulation;
+ for(char i = 0; i < 8; i++)
+	 final_iter = final_iter - (t_sine90<T, flag>(final_iter) - x) / t_cosine90<T, flag>(final_iter);
+
+ }
+	
+	return final_iter;
+}
+
+
+template<typename T, uint8_t flag>
+inline T t_acos(const T ix) {
+	constexpr T _pi_half = Math_PI/2;
+	constexpr T _inv_pi_half = 1.0 / _pi_half;
+ const T x = ((ix) - (int)((ix) * _inv_pi_half) * (_pi_half)); //-90 - 90 deg
+
+ const T x_squared = x * x;
+ T iteration = x;
+ T accumulation = _pi_half;
+ T final_iter;
+ 
+ //floating point error correction between cos(1°) - cos(41°)
+ if(x <= 0.99984769515639126958 && x >= 0.75470958022277201405)
+  return _pi_half - t_asin<T, flag>(x);
+ 
+ switch(flag) {
+  case 1:
+ iteration *= x_squared;
+                //(2 - 1) * (2 - 3)
+ accumulation -= -1.0 * iteration * 0.5000000000000000000000000000000000000000; //1 / 2
+
+ iteration *= x_squared;
+                //(2 * 2 - 1) * (2 * 2 - 3)
+ accumulation -= 3.0 * iteration * 0.2500000000000000000000000000000000000000; //1 / (2 * 2)
+
+ iteration *= x_squared;
+                //(2 * 3 - 1) * (2 * 3 - 3)
+ accumulation -= 15.0 * iteration * 0.1666666666666666666666666666666666586420; //1 / (2 * 3)
+ 
+ iteration *= x_squared;
+                //(2 * 4 - 1) * (2 * 4 - 3)
+ accumulation -= 35.0 * iteration * 0.1250000000000000000000000000000000000000; //1 / (2 * 4)
+ 
+ iteration *= x_squared;
+                //(2 * 5 - 1) * (2 * 5 - 3)
+ accumulation -= 63.0 * iteration * 0.1000000000000000000000000000000000048148; //1 / (2 * 5)
+ 
+ iteration *= x_squared;
+                //(2 * 6 - 1) * (2 * 6 - 3)
+ accumulation -= 99.0 * iteration * 0.0833333333333333333333333333333333293210; //1 / (2 * 6)
+ 
+ iteration *= x_squared;
+                //(2 * 7 - 1) * (2 * 7 - 3)
+ accumulation -= 143.0 * iteration * 0.0714285714285714285714285714285714251323; //1 / (2 * 7)
+ 
+ iteration *= x_squared;
+                //(2 * 8 - 1) * (2 * 8 - 3)
+ accumulation -= 195.0 * iteration * 0.0625000000000000000000000000000000000000; //1 / (2 * 8)
+ 
+ final_iter = accumulation;
+	for(char i = 0; i < 6; i++)
+	 final_iter = final_iter - (t_cosine90<T, flag>(final_iter) - x) / -t_sine90<T, flag>(final_iter);
+  break;
+  case 2:
+ iteration *= x_squared;
+                //(2 - 1) * (2 - 3)
+ accumulation -= -1.0 * iteration * 0.5000000000000000000000000000000000000000; //1 / 2
+
+ iteration *= x_squared;
+                //(2 * 2 - 1) * (2 * 2 - 3)
+ accumulation -= 3.0 * iteration * 0.2500000000000000000000000000000000000000; //1 / (2 * 2)
+
+ iteration *= x_squared;
+                //(2 * 3 - 1) * (2 * 3 - 3)
+ accumulation -= 15.0 * iteration * 0.1666666666666666666666666666666666586420; //1 / (2 * 3)
+ 
+ iteration *= x_squared;
+                //(2 * 4 - 1) * (2 * 4 - 3)
+ accumulation -= 35.0 * iteration * 0.1250000000000000000000000000000000000000; //1 / (2 * 4)
+ 
+ final_iter = accumulation;
+	for(char i = 0; i < 2; i++)
+	 final_iter = final_iter - (t_cosine90<T, flag>(final_iter) - x) / -t_sine90<T, flag>(final_iter);
+  break;
+  default:
+ iteration *= x_squared;
+                //(2 - 1) * (2 - 3)
+ accumulation -= -1.0 * iteration * 0.5000000000000000000000000000000000000000; //1 / 2
+
+ iteration *= x_squared;
+                //(2 * 2 - 1) * (2 * 2 - 3)
+ accumulation -= 3.0 * iteration * 0.2500000000000000000000000000000000000000; //1 / (2 * 2)
+
+ iteration *= x_squared;
+                //(2 * 3 - 1) * (2 * 3 - 3)
+ accumulation -= 15.0 * iteration * 0.1666666666666666666666666666666666586420; //1 / (2 * 3)
+ 
+ iteration *= x_squared;
+                //(2 * 4 - 1) * (2 * 4 - 3)
+ accumulation -= 35.0 * iteration * 0.1250000000000000000000000000000000000000; //1 / (2 * 4)
+ 
+ iteration *= x_squared;
+                //(2 * 5 - 1) * (2 * 5 - 3)
+ accumulation -= 63.0 * iteration * 0.1000000000000000000000000000000000048148; //1 / (2 * 5)
+ 
+ iteration *= x_squared;
+                //(2 * 6 - 1) * (2 * 6 - 3)
+ accumulation -= 99.0 * iteration * 0.0833333333333333333333333333333333293210; //1 / (2 * 6)
+ 
+ iteration *= x_squared;
+                //(2 * 7 - 1) * (2 * 7 - 3)
+ accumulation -= 143.0 * iteration * 0.0714285714285714285714285714285714251323; //1 / (2 * 7)
+ 
+ iteration *= x_squared;
+                //(2 * 8 - 1) * (2 * 8 - 3)
+ accumulation -= 195.0 * iteration * 0.0625000000000000000000000000000000000000; //1 / (2 * 8)
+ 
+ iteration *= x_squared;
+                //(2 * 9 - 1) * (2 * 9 - 3)
+ accumulation -= 255.0 * iteration * 0.0555555555555555555555555555555555528807; //1 / (2 * 9)
+ 
+ iteration *= x_squared;
+                //(2 * 10 - 1) * (2 * 10 - 3)
+ accumulation -= 323.0 * iteration * 0.0500000000000000000000000000000000024074; //1 / (2 * 10)
+ 
+ iteration *= x_squared;
+                //(2 * 11 - 1) * (2 * 11 - 3)
+ accumulation -= 399.0 * iteration * 0.0454545454545454545454545454545454556397; //1 / (2 * 11)
+ 
+ iteration *= x_squared;
+                //(2 * 12 - 1) * (2 * 12 - 3)
+ accumulation -= 483.0 * iteration * 0.0416666666666666666666666666666666646605; //1 / (2 * 12)
+ 
+ iteration *= x_squared;
+                //(2 * 13 - 1) * (2 * 13 - 3)
+ accumulation -= 575.0 * iteration * 0.0384615384615384615384615384615384633903; //1 / (2 * 13)
+ 
+ iteration *= x_squared;
+                //(2 * 14 - 1) * (2 * 14 - 3)
+ accumulation -= 675.0 * iteration * 0.0357142857142857142857142857142857125661; //1 / (2 * 14)
+ 
+ iteration *= x_squared;
+                //(2 * 15 - 1) * (2 * 15 - 3)
+ accumulation -= 783.0 * iteration * 0.0333333333333333333333333333333333329321; //1 / (2 * 15)
+ 
+ iteration *= x_squared;
+                //(2 * 16 - 1) * (2 * 16 - 3)
+ accumulation -= 899.0 * iteration * 0.0312500000000000000000000000000000000000; //1 / (2 * 16)
+
+ final_iter = accumulation;
+	for(char i = 0; i < 8; i++)
+	 final_iter = final_iter - (t_cosine90<T, flag>(final_iter) - x) / -t_sine90<T, flag>(final_iter);
+ }
+
+ return final_iter;
+}
+
+
+template<typename T, uint8_t flag>
+inline T t_atan(const T ix) {
+	constexpr T _pi = Math_PI;
+	constexpr T _pi_half = Math_PI/2;
+	constexpr T _inv_pi_half = 1.0 / _pi_half;
+ T x = ((ix) - (int)((ix) * _inv_pi_half) * (_pi_half)); //-90 - 90 deg
+
+ if(ix > _pi_half && ix <= _pi)
+  x = _pi_half-x;
+  
+	const T x_squared = -x * x;
+	T accumulation = x;
+	T iteration = x;
+ T tangent;
+ T final_iter;
+ 
+ //floating point correction between tan(67°) - tan(89°)
+ if(x >= 2.35585236582375312508 && x <= 57.28996163075914438423) {
+                   //tan(67°)                 tan(89°)
+  const T p = (x - 2.35585236582375312508) / (57.28996163075914438423 - 2.35585236582375312508);
+  const T max = 1.55334303427495323824; //atan(tan(89°))
+  const T min = 1.16937059883620086964; //atan(tan(67°))
+  return min + p * (max-min); //lerp
+ }
+ 
+	switch(flag) {
+	 case 1:
+                           //  1 / (3 * 2)   
+ iteration *= x_squared * 0.1666666666666666574148081281236954964697;
+ accumulation += iteration;
+                           //  1 / (5 * 4)   
+ iteration *= x_squared * 0.0500000000000000027755575615628913510591;
+ accumulation += iteration;
+                           //  1 / (7 * 6)   
+ iteration *= x_squared * 0.0238095238095238082021154468748136423528;
+ accumulation += iteration;
+                           //  1 / (9 * 8)   
+ iteration *= x_squared * 0.0138888888888888881179006773436412913725;
+ accumulation += iteration;
+                           //  1 / (11 * 10)   
+ iteration *= x_squared * 0.0090909090909090904675249333877218305133;
+ accumulation += iteration;
+                           //  1 / (13 * 12)   
+ iteration *= x_squared * 0.0064102564102564100340098107722042186651;
+ accumulation += iteration;
+                           //  1 / (15 * 14)   
+ iteration *= x_squared * 0.0047619047619047623343124797656855662353;
+ accumulation += iteration;
+                           //  1 / (17 * 16)   
+ iteration *= x_squared * 0.0036764705882352940666257801183292031055;
+ accumulation += iteration;
+ 
+ final_iter = accumulation;
+ for(char i = 0; i < 6; i++) {
+  tangent = t_tan<T, flag>(final_iter);
+  final_iter = final_iter - (tangent - x) / (1.0 + tangent * tangent);
+ }
+	 break;
+	 case 2:
+                           //  1 / (3 * 2)   
+ iteration *= x_squared * 0.1666666666666666574148081281236954964697;
+ accumulation += iteration;
+                           //  1 / (5 * 4)   
+ iteration *= x_squared * 0.0500000000000000027755575615628913510591;
+ accumulation += iteration;
+                           //  1 / (7 * 6)   
+ iteration *= x_squared * 0.0238095238095238082021154468748136423528;
+ accumulation += iteration;
+                           //  1 / (9 * 8)   
+ iteration *= x_squared * 0.0138888888888888881179006773436412913725;
+ accumulation += iteration;
+ 
+ final_iter = accumulation;
+ for(char i = 0; i < 2; i++) {
+  tangent = t_tan<T, flag>(final_iter);
+  final_iter = final_iter - (tangent - x) / (1.0 + tangent * tangent);
+ }
+	 break;
+	 default:
+                           //  1 / (3 * 2)   
+ iteration *= x_squared * 0.1666666666666666574148081281236954964697;
+ accumulation += iteration;
+                           //  1 / (5 * 4)   
+ iteration *= x_squared * 0.0500000000000000027755575615628913510591;
+ accumulation += iteration;
+                           //  1 / (7 * 6)   
+ iteration *= x_squared * 0.0238095238095238082021154468748136423528;
+ accumulation += iteration;
+                           //  1 / (9 * 8)   
+ iteration *= x_squared * 0.0138888888888888881179006773436412913725;
+ accumulation += iteration;
+                           //  1 / (11 * 10)   
+ iteration *= x_squared * 0.0090909090909090904675249333877218305133;
+ accumulation += iteration;
+                           //  1 / (13 * 12)   
+ iteration *= x_squared * 0.0064102564102564100340098107722042186651;
+ accumulation += iteration;
+                           //  1 / (15 * 14)   
+ iteration *= x_squared * 0.0047619047619047623343124797656855662353;
+ accumulation += iteration;
+                           //  1 / (17 * 16)   
+ iteration *= x_squared * 0.0036764705882352940666257801183292031055;
+ accumulation += iteration;
+                           //  1 / (19 * 18)   
+ iteration *= x_squared * 0.0029239766081871343406106689144507981837;
+ accumulation += iteration;
+                           //  1 / (21 * 20)   
+ iteration *= x_squared * 0.0023809523809523809523809523809523811387;
+ accumulation += iteration;
+                           //  1 / (23 * 22)   
+ iteration *= x_squared * 0.0019762845849802371541501976284584980059;
+ accumulation += iteration;
+                           //  1 / (25 * 24)   
+ iteration *= x_squared * 0.0016666666666666666666666666666666667595;
+ accumulation += iteration;
+                           //  1 / (27 * 26)   
+ iteration *= x_squared * 0.0014245014245014245014245014245014244377;
+ accumulation += iteration;
+                           //  1 / (29 * 28)   
+ iteration *= x_squared * 0.0012315270935960591133004926108374384551;
+ accumulation += iteration;
+                           //  1 / (31 * 30)   
+ iteration *= x_squared * 0.0010752688172043010752688172043010752680;
+ accumulation += iteration;
+ 
+ final_iter = accumulation;
+ for(char i = 0; i < 8; i++) {
+  tangent = t_tan<T, flag>(final_iter);
+  final_iter = final_iter - (tangent - x) / (1.0 + tangent * tangent);
+ }
+	}
+
+	return final_iter;
+}
+
+
+template<typename T, uint8_t flag>
+inline T t_atan2(const T y, const T x) {
+	constexpr T _pi = Math_PI;
+	constexpr T _pi_half = Math_PI/2;
+ if(x > 0)
+  return t_atan<T, flag>(y / x);
+ else if(x < 0) {
+   if(y >= 0)
+     return t_atan<T, flag>(y / x) + _pi;
+    else
+     return t_atan<T, flag>(y / x) - _pi;
+  } else {
+   if(y > 0)
+    return _pi_half;
+   else if(y < 0)
+    return -_pi_half;
+  }
+ return 0;
+}
+/*end template func*/
+
 inline double floor(double p_x) {
 	return ::floor(p_x);
 }
@@ -292,24 +945,48 @@ inline float exp(float p_x) {
 }
 
 inline double sin(double p_x) {
+#if __TRIG_FUNC >= 0
+ return t_sin<double, __TRIG_FUNC>(p_x);
+#else 
 	return ::sin(p_x);
+#endif
 }
 inline float sin(float p_x) {
+#if __TRIG_FUNC >= 0
+ return t_sin<float, __TRIG_FUNC>(p_x);
+#else
 	return ::sinf(p_x);
+#endif
 }
 
 inline double cos(double p_x) {
+#if __TRIG_FUNC >= 0
+ return t_cos<double, __TRIG_FUNC>(p_x);
+#else 
 	return ::cos(p_x);
+#endif
 }
 inline float cos(float p_x) {
+#if __TRIG_FUNC >= 0
+ return t_cos<float, __TRIG_FUNC>(p_x);
+#else
 	return ::cosf(p_x);
+#endif
 }
 
 inline double tan(double p_x) {
+#if __TRIG_FUNC >= 0
+ return t_tan<double, __TRIG_FUNC>(p_x);
+#else
 	return ::tan(p_x);
+#endif
 }
 inline float tan(float p_x) {
+#if __TRIG_FUNC >= 0
+ return t_tan<float, __TRIG_FUNC>(p_x);
+#else
 	return ::tanf(p_x);
+#endif
 }
 
 inline double sinh(double p_x) {
@@ -348,31 +1025,63 @@ inline float tanh(float p_x) {
 }
 
 inline double asin(double p_x) {
+#if __TRIG_FUNC >= 0
+ return t_asin<double, __TRIG_FUNC>(p_x);
+#else
 	return ::asin(p_x);
+#endif
 }
 inline float asin(float p_x) {
+#if __TRIG_FUNC >= 0
+ return t_asin<float, __TRIG_FUNC>(p_x);
+#else
 	return ::asinf(p_x);
+#endif
 }
 
 inline double acos(double p_x) {
+#if __TRIG_FUNC >= 0
+ return t_acos<double, __TRIG_FUNC>(p_x);
+#else
 	return ::acos(p_x);
+#endif
 }
 inline float acos(float p_x) {
+#if __TRIG_FUNC >= 0
+ return t_acos<float, __TRIG_FUNC>(p_x);
+#else
 	return ::acosf(p_x);
+#endif
 }
 
 inline double atan(double p_x) {
+#if __TRIG_FUNC >= 0
+ return t_atan<double, __TRIG_FUNC>(p_x);
+#else
 	return ::atan(p_x);
+#endif
 }
 inline float atan(float p_x) {
+#if __TRIG_FUNC >= 0
+ return t_atan<float, __TRIG_FUNC>(p_x);
+#else
 	return ::atanf(p_x);
+#endif
 }
 
 inline double atan2(double p_y, double p_x) {
+#if __TRIG_FUNC >= 0
+ return t_atan2<double, __TRIG_FUNC>(p_y, p_x);
+#else
 	return ::atan2(p_y, p_x);
+#endif
 }
 inline float atan2(float p_y, float p_x) {
+#if __TRIG_FUNC >= 0
+ return t_atan2<float, __TRIG_FUNC>(p_y, p_x);
+#else 
 	return ::atan2f(p_y, p_x);
+#endif
 }
 
 inline double sqrt(double p_x) {
