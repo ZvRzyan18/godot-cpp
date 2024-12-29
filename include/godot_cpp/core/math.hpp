@@ -400,6 +400,50 @@ inline T t_cosine90(const T x) {
 }
 
 
+//approximating longest curve in arc tangent from atan(tan(66°)) to pi/2
+//using linear interpolation and bezier curve
+template<typename T>
+inline T __atan66(const T x) {
+/*
+	const double _tan_89 = 57.28996163075914438423;
+	
+	const double _tan_66 = 2.24603677390421641036;
+	const double _atan_66 = 1.15191730631625754988;
+	
+	const double _tan_76 = 4.01078093353584552716;
+	const double _atan_76 = 1.32645023151569052544;
+	
+	const double _tan_83 = 8.14434642797459318331;
+	const double _atan_83 = 1.44862327915529354172;
+*/
+ constexpr T _pi_half = Math_PI/2;
+  // x >= _tan_66 && x < _tan_76
+	if(x >= 2.24603677390421641036 && x < 4.01078093353584552716) {
+		const T t = (x-2.24603677390421641036) / (57.28996163075914438423-2.24603677390421641036) * 0.00001;
+		const T mp = ((1.15191730631625754988+_pi_half) * 0.5) + 299000.0;
+		const T ma = 1.15191730631625754988 + t * (mp-1.15191730631625754988);
+		const T mb = mp + t * (_pi_half-mp);
+		return ma + t * (mb-ma);
+		//x >= _tan76 && x < _tan_83
+	} else if(x >= 4.01078093353584552716 && x < 8.14434642797459318331) {
+		
+		const T t = (x-4.01078093353584552716) / (57.28996163075914438423-4.01078093353584552716) * 0.00001;
+		const T mp = ((1.32645023151569052544+_pi_half) * 0.5) + 100000.0;
+		const T ma = 1.32645023151569052544 + t * (mp-1.32645023151569052544);
+		const T mb = mp + t * (_pi_half-mp);
+		return ma + t * (mb-ma);
+		//x >= _tan_83
+	} else if(x >= 8.14434642797459318331) {
+		const T t = (x-8.14434642797459318331) / (57.28996163075914438423-8.14434642797459318331) * 0.00001;
+		const T mp = ((1.44862327915529354172+_pi_half) * 0.5) + 10000.0;
+		const T ma = 1.44862327915529354172 + t * (mp-1.44862327915529354172);
+		const T mb = mp + t * (_pi_half-mp);
+		return ma + t * (mb-ma);
+	} //else  x >= tan(89°)
+	return 0;
+}
+
+
 template<typename T, uint8_t flag>
 inline T t_sin(const T theta) {
 	constexpr T _pi = Math_PI;
@@ -771,12 +815,15 @@ inline T t_atan(const T ix) {
 	constexpr T _pi = Math_PI;
 	constexpr T _pi_half = Math_PI/2;
 	constexpr T _inv_pi_half = 1.0 / _pi_half;
- T x = ((ix) - (int)((ix) * _inv_pi_half) * (_pi_half)); //-90 - 90 deg
+ T x = ix;
 
- if(ix > _pi_half && ix <= _pi)
-  x = _pi_half-x;
-  
-	const T x_squared = -x * x;
+//floating point error correction when x is between tan(66°) - tan(89°)
+ if(x >= 2.24603677390421641036)
+  return __atan66<T>(x);
+ else if(x <= -2.24603677390421641036)
+  return -__atan66<T>(x);
+
+ 	const T x_squared = -x * x;
 	T accumulation = x;
 	T iteration = x;
  T tangent;
