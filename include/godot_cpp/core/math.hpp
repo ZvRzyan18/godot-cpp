@@ -400,10 +400,10 @@ inline T t_cosine90(const T x) {
 }
 
 
-//approximating longest curve in arc tangent from atan(tan(66°)) to pi/2
+//approximating longest curve in arc tangent from atan(tan(66°)) towards pi/2
 //using linear interpolation and bezier curve
 template<typename T>
-inline T __atan66(const T x) {
+inline T __atan66(const T x) noexcept {
 /*
 	const double _tan_89 = 57.28996163075914438423;
 	
@@ -416,7 +416,6 @@ inline T __atan66(const T x) {
 	const double _tan_83 = 8.14434642797459318331;
 	const double _atan_83 = 1.44862327915529354172;
 */
- constexpr T _pi_half = Math_PI/2;
   // x >= _tan_66 && x < _tan_76
 	if(x >= 2.24603677390421641036 && x < 4.01078093353584552716) {
 		const T t = (x-2.24603677390421641036) / (57.28996163075914438423-2.24603677390421641036) * 0.00001;
@@ -432,14 +431,22 @@ inline T __atan66(const T x) {
 		const T ma = 1.32645023151569052544 + t * (mp-1.32645023151569052544);
 		const T mb = mp + t * (_pi_half-mp);
 		return ma + t * (mb-ma);
-		//x >= _tan_83
-	} else if(x >= 8.14434642797459318331) {
+		//x >= _tan_83 && x < _tan_89
+	} else if(x >= 8.14434642797459318331 && x < 57.28996163075914438423) {
 		const T t = (x-8.14434642797459318331) / (57.28996163075914438423-8.14434642797459318331) * 0.00001;
 		const T mp = ((1.44862327915529354172+_pi_half) * 0.5) + 10000.0;
 		const T ma = 1.44862327915529354172 + t * (mp-1.44862327915529354172);
 		const T mb = mp + t * (_pi_half-mp);
 		return ma + t * (mb-ma);
-	} //else  x >= tan(89°)
+		//x >= _tan_89 && x < _tan_90
+	} else if(x >= 57.28996163075914438423 && x < 16331239353195370.0) {
+		const T t = (x-57.28996163075914438423) / (16331239353195370.0-57.28996163075914438423) * 0.00001;
+		const T mp = ((1.55334303427495323824+_pi_half) * 0.5) + 10000.0;
+		const T ma = 1.55334303427495323824 + t * (mp-1.55334303427495323824);
+		const T mb = mp + t * (_pi_half-mp);
+		return ma + t * (mb-ma);
+	} else 
+	 return _pi_half;
 	return 0;
 }
 
@@ -821,7 +828,7 @@ inline T t_atan(const T ix) {
  if(x >= 2.24603677390421641036)
   return __atan66<T>(x);
  else if(x <= -2.24603677390421641036)
-  return -__atan66<T>(x);
+  return -__atan66<T>(-x);
 
  	const T x_squared = -x * x;
 	T accumulation = x;
