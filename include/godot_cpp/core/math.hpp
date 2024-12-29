@@ -400,7 +400,7 @@ inline T t_cosine90(const T x) {
 }
 
 
-//approximating longest curve in arc tangent from atan(tan(66°)) towards pi/2
+//approximating longest curve in arc tangent from atan(tan(66°)) to pi/2
 //using linear interpolation and bezier curve
 template<typename T>
 inline T __atan66(const T x) noexcept {
@@ -836,7 +836,8 @@ inline T t_atan(const T ix) {
 	T iteration = x;
  T tangent;
  T final_iter;
- 
+	
+ /*
  //floating point correction between tan(67°) - tan(89°)
  if(x >= 2.35585236582375312508 && x <= 57.28996163075914438423) {
                    //tan(67°)                 tan(89°)
@@ -845,7 +846,7 @@ inline T t_atan(const T ix) {
   const T min = 1.16937059883620086964; //atan(tan(67°))
   return min + p * (max-min); //lerp
  }
- 
+ */
 	switch(flag) {
 	 case 1:
                            //  1 / (3 * 2)   
